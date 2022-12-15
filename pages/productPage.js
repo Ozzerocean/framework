@@ -48,11 +48,11 @@ class ProductPage extends BasePage {
   }
 
   async getQuantityOfProduct() {
-    logger.info("Getting quantity of products in the bag");
     const elements = await this.findElementsByXpath(ProductPage.PRODUCT_QUANTITY_XPATH);
     if (elements.length > 3) {
       return this.getQuantityOfProduct();
     } 
+    logger.info("Getting quantity of products in the bag");
     return elements[0].getText();
   }
 

@@ -9,7 +9,7 @@ class BasePage {
   async openPage(url) {
     logger.info('Opening the page: ' + url);
     await this.driver.get(url);
-    logger.info('Confirming age.');
+    logger.info('Confirming age');
     await this.confirmAge();
 
     return this;
