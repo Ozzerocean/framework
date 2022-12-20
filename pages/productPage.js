@@ -8,7 +8,10 @@ class ProductPage extends BasePage {
   static ADD_MORE_BUTTON_XPATH = "//span[text()='Add More']//ancestor::button";
   static BAG_BUTTON_XPATH = "//div[@class='ec-minicart__body']";
   static PRODUCT_QUANTITY_XPATH = "//div[@class='form-control__select-text']";
-  static PRODUCTS_IN_THE_BAG_XPATH = "//div[@class='ec-cart__products-inner']/div"
+  static PRODUCTS_IN_THE_BAG_XPATH = "//div[@class='ec-cart__products-inner']/div";
+  static PRODUCT_NAME_IN_THE_BAG_XPATH = "//a[@class='ec-cart-item__title']";
+  static REMOVE_FROM_BAG_BUTTON_XPATH = "//a[contains(@class, 'ec-cart-item__control-inner')]";
+  static EMPTY_BAG_MESSAGE_XPATH = "//div[@class='ec-cart__message']"
 
   async choseQuantity(quantity) {
     logger.info("Chosing quantity of the product");
@@ -57,6 +60,28 @@ class ProductPage extends BasePage {
     logger.info("Getting number of products in the bag");
     const elements = await this.findElementsByXpath(ProductPage.PRODUCTS_IN_THE_BAG_XPATH);
     return elements.length;
+  }
+
+  async getProductName() {
+    logger.info("Getting name of the product in the bag");
+    const productName = await this.findByXpath(ProductPage.PRODUCT_NAME_IN_THE_BAG_XPATH);
+
+    return productName.getText();
+  }
+
+  async removeProductFromBag() {
+    logger.info("Removing product from the bag");
+    const removeButton = await this.findByXpath(ProductPage.REMOVE_FROM_BAG_BUTTON_XPATH);
+    await removeButton.click();
+
+    return this;
+  }
+
+  async getEmptyBagMessage() {
+    logger.info("Getting empty bag message");
+    const emptyBagMessage = await this.findByXpath(ProductPage.EMPTY_BAG_MESSAGE_XPATH);
+
+    return emptyBagMessage.getText();
   }
 }
 

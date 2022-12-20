@@ -16,12 +16,15 @@ describe("Adding an item to the bag", () => {
     this.driver = await Driver.createDriver();
   });
 
-  it("Product is shown in the bag", async function () {
+  it("Product is shown in the bag and can be removed", async function () {
     const productPage = new ProductPage(this.driver);
     await productPage.openPage(this.anyProductPageURL);
     await productPage.clickAddButton();
     await productPage.goToTheBag();
     expect(await productPage.getNumberOfProducts()).to.be.equal(1);
+    expect(await productPage.getProductName()).to.contain(this.productName);
+    await productPage.removeProductFromBag();
+    expect(await productPage.getEmptyBagMessage()).to.contain(this.emptyBagMessage);
   }).timeout(Constants.TEST_TIMEOUT);
 
   it("Choose Quantity of the product lower then 1 and 1 or more", async function () {
