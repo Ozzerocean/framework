@@ -3,7 +3,6 @@ const { Key } = require("selenium-webdriver");
 const logger = require("../logger");
 
 class ProductPage extends BasePage {
-  static PAGE_URL = "https://www.honeyroseusa.com/ecwid#!/WHITE/p/47998162/category=32354212";
   static QUANTITY_INPUT_XPATH = "//input[@id='qty-field']";
   static ADD_TO_BAG_BUTTON_XPATH = "//span[text()='Add to Bag']//ancestor::button";
   static ADD_MORE_BUTTON_XPATH = "//span[text()='Add More']//ancestor::button";
@@ -11,8 +10,6 @@ class ProductPage extends BasePage {
   static PRODUCT_QUANTITY_XPATH = "//div[@class='form-control__select-text']";
   static PRODUCTS_IN_THE_BAG_XPATH = "//div[@class='ec-cart__products-inner']/div"
 
-  openPage = async () => super.openPage(ProductPage.PAGE_URL);
-  
   async choseQuantity(quantity) {
     logger.info("Chosing quantity of the product");
     const element = await this.findByXpath(ProductPage.QUANTITY_INPUT_XPATH);

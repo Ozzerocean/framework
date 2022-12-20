@@ -18,7 +18,7 @@ describe("Adding an item to the bag", () => {
 
   it("Product is shown in the bag", async function () {
     const productPage = new ProductPage(this.driver);
-    await productPage.openPage();
+    await productPage.openPage(this.anyProductPageURL);
     await productPage.clickAddButton();
     await productPage.goToTheBag();
     expect(await productPage.getNumberOfProducts()).to.be.equal(1);
@@ -26,7 +26,7 @@ describe("Adding an item to the bag", () => {
 
   it("Choose Quantity of the product lower then 1 and 1 or more", async function () {
     const productPage = new ProductPage(this.driver);
-    await productPage.openPage();
+    await productPage.openPage(this.anyProductPageURL);
     await productPage.choseQuantity("0");
     await productPage.clickAddButton();
     await productPage.choseQuantity(this.itemsQuantityToAdd);
